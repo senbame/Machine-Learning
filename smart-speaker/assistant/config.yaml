@@ -1,0 +1,3 @@
+﻿whisper_model: small
+language: ru
+intent_model_path: ../intent-classifier/models/

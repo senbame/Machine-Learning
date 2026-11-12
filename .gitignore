@@ -1,0 +1,14 @@
+﻿.venv/
+**/data/*
+!**/data/README.md
+**/models/*
+!**/models/.gitkeep
+asr-eval/ffmpeg_bin/
+*.ogg
+*.wav
+*.mp3
+*.pt
+*.bin
+*.exe
+__pycache__/
+.ipynb_checkpoints/

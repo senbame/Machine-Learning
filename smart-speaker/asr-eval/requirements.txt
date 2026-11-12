@@ -1,0 +1,5 @@
+﻿torch
+transformers
+imageio-ffmpeg
+jupyter
+jiwer

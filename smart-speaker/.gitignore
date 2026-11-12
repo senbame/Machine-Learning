@@ -1,9 +1,0 @@
-.venv/
-data/*
-!data/README.md
-*.wav
-*.mp3
-*.pt
-*.bin
-__pycache__/
-.ipynb_checkpoints/
