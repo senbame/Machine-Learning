@@ -1,5 +1,7 @@
 ﻿torch
 transformers
-imageio-ffmpeg
-jupyter
+librosa
 jiwer
+pandas
+matplotlib
+jupyter
