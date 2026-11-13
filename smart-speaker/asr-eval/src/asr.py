@@ -4,6 +4,8 @@ import time
 import librosa
 import torch
 from transformers import pipeline
+import subprocess
+from pathlib import Path
 
 
 def load_asr(model_name: str):
@@ -19,10 +21,18 @@ def load_asr(model_name: str):
 
 
 def load_audio(path):
-    """Читает файл в моно, 16 кГц (ffmpeg не нужен)."""
+    path = Path(path)
+    if path.suffix.lower() != ".wav":
+        wav = path.with_suffix(".wav")
+        if not wav.exists():
+            subprocess.run(
+                ["ffmpeg", "-y", "-i", str(path), "-ar", "16000", "-ac", "1", str(wav)],
+                check=True
+            )
+        path = wav
+
     audio, _ = librosa.load(str(path), sr=16000, mono=True)
     return audio
-
 
 def transcribe(asr, audio, language="russian"):
     result = asr(audio, generate_kwargs={"language": language, "task": "transcribe"})
