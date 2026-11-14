@@ -38,9 +38,11 @@ def main():
         for _, r in refs.iterrows():
             audio = load_audio(AUDIO_DIR / r["file"])
             duration = len(audio) / 16000
-
-            start = time.perf_counter()
-            hyp = transcribe(asr, audio, args.language)
+            times = []
+            for _ in range(3):  # прогрев: несколько первых вызовов всегда медленнее
+                start = time.perf_counter()
+                hyp = transcribe(asr, audio, args.language)
+                times.append(time.perf_counter() - start)
             elapsed = time.perf_counter() - start
 
             rows.append({
@@ -71,8 +73,7 @@ def main():
             "model": model,
             "WER": jiwer.wer(refs_n, hyps_n),
             "CER": jiwer.cer(refs_n, hyps_n),
-            "avg_time_s": g["time_s"].mean(),
-            "avg_RTF": g["rtf"].mean(),
+            "median_time_s": g["time_s"].median(),
             "load_time_s": load_times[model],
         })
     summary = pd.DataFrame(summary).round(3)

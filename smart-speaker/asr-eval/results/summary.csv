@@ -1,4 +1,4 @@
-model,WER,CER,avg_time_s,avg_RTF,load_time_s
-tiny,0.476,0.184,1.456,0.524,6.792
-base,0.429,0.14,2.524,0.93,5.222
-small,0.286,0.07,9.398,3.497,24.613
+model,WER,CER,median_time_s,load_time_s
+tiny,0.524,0.144,1.174,2.26
+base,0.476,0.102,2.293,2.058
+small,0.19,0.034,7.372,4.946
