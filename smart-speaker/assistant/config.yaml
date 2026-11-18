@@ -1,3 +1,19 @@
-﻿whisper_model: small
-language: ru
-intent_model_path: ../intent-classifier/models/
+﻿asr:
+  model: base
+  language: russian
+  mic_seconds: 4
+nlu:
+  intents_csv: ../intent-classifier/data/intents.csv
+  threshold: 0.35
+  C: 10
+dry_run: false
+apps:
+  browser: {kind: url, target: "https://www.google.com", say: "Открываю браузер", aliases: [браузер, хром, интернет]}
+  youtube: {kind: url, target: "https://www.youtube.com", say: "Открываю ютуб", aliases: [ютуб, ютюб, ютьюб, youtube]}
+  mail: {kind: url, target: "https://mail.google.com", say: "Открываю почту", aliases: [почта, почту, gmail]}
+  maps: {kind: url, target: "https://www.google.com/maps", say: "Открываю карты", aliases: [карты, карту]}
+  calendar: {kind: url, target: "https://calendar.google.com", say: "Открываю календарь", aliases: [календарь]}
+  telegram: {kind: url, target: "https://web.telegram.org", say: "Открываю телеграм", aliases: [телеграм, телеграмм, telegram]}
+  calculator: {kind: cmd, target: "calc.exe", say: "Открываю калькулятор", aliases: [калькулятор]}
+  notepad: {kind: cmd, target: "notepad.exe", say: "Открываю блокнот", aliases: [блокнот]}
+  settings: {kind: uri, target: "ms-settings:", say: "Открываю настройки", aliases: [настройки]}
