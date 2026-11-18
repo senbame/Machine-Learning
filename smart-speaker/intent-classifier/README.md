@@ -43,7 +43,7 @@
 6. **Уверенность модели не отделяет верные ответы от ошибочных.** У TF-IDF (подбор `C`) ошибочный ответ на «порбона» имеет уверенность 0,53, у верных ответов бывает 0,51. Простой порог «не понял» по этим данным надёжно не работает.
 7. **Скорость не различает модели на практике:** 1,5 мс и 7,2 мс на фразу, а распознавание речи занимает от 1 до 7 с.
 
-**Выбор для прототипа ассистента:** TF-IDF + логистическая регрессия (`C=10`): точнее на выходах Whisper и быстрее.
+**Выбор для прототипа ассистента:** TF-IDF + логистическая регрессия (`C=10`): точнее на выходах Whisper и быстрее. Эта модель обучается и сохраняется скриптами из `src/`, сравнение моделей лежит в ноутбуке.
 
 ## Ограничения
 
@@ -61,22 +61,48 @@
 
 ## Как запустить
 
+Из корня репозитория (`smart-speaker`) установите зависимости, затем работайте из папки `intent-classifier`:
+
 ```bash
-pip install -r requirements.txt        # из корня smart-speaker
-python -m src.prepare_data             # из папки intent-classifier: train.csv, test.csv, hard_asr.csv
+pip install -r requirements.txt
+cd intent-classifier
+
+python -m src.prepare_data     # train.csv, test.csv и hard_asr.csv из intents.csv и результатов asr-eval
+python -m src.train            # обучает TF-IDF + LR (C=10), сохраняет models/intent_tfidf.joblib
+python -m src.evaluate         # метрики на test и на выходах Whisper, пишет results/final_model_metrics.csv
+python -m src.predict "открой ютуб"
 ```
 
-Затем откройте `notebooks/03_tfidf_vs_rubert.ipynb` и выполните ячейки сверху вниз. Первый запуск скачает rubert-tiny2 (около 118 МБ).
+`prepare_data` читает `../asr-eval/results/results_per_file.csv`, поэтому сначала должен быть выполнен прогон `asr-eval`. Для финальной модели ассистента можно обучить на всех данных: `python -m src.train --all`. После этого `evaluate` покажет завышенные цифры, так как `test.csv` уже входил в обучение.
+
+Сравнение TF-IDF и rubert-tiny2 (таблицы выше) воспроизводит ноутбук `notebooks/03_tfidf_vs_rubert.ipynb`. Первый запуск скачает rubert-tiny2 (около 118 МБ).
+
+### Использование в коде
+
+```python
+from src.predict import predict_intent
+
+intent, confidence = predict_intent("Запусти браузер.")   # нормализация текста встроена в модель
+```
+
+Скрипты `train.py`, `evaluate.py` и `predict.py` воспроизводят на test и на выходах Whisper те же результаты, что строка «TF-IDF (подбор C)» в таблице выше.
 
 ## Структура
 
 ```
 intent-classifier/
 ├── data/
-│   ├── intents.csv        # все фразы
-│   ├── train.csv, test.csv
-│   └── hard_asr.csv       # выходы Whisper на записях
-├── notebooks/03_tfidf_vs_rubert.ipynb
-├── src/prepare_data.py
-└── results/               # intent_comparison.csv, confusion_matrices.png
+│   ├── intents.csv           # все фразы
+│   ├── train.csv, test.csv   # разбиение 156 / 40
+│   └── hard_asr.csv          # выходы Whisper на записях
+├── notebooks/
+│   └── 03_tfidf_vs_rubert.ipynb   # сравнение моделей, кросс-валидация, анализ ошибок
+├── src/
+│   ├── dataset.py            # загрузка данных, нормализация текста
+│   ├── prepare_data.py       # сборка train / test / hard_asr
+│   ├── train.py              # обучение и сохранение модели
+│   ├── evaluate.py           # метрики сохранённой модели
+│   └── predict.py            # predict_intent(text)
+├── models/                   # сохранённая модель (не в git, создаётся train.py)
+└── results/                  # intent_comparison.csv, confusion_matrices.png, final_model_metrics.csv
 ```

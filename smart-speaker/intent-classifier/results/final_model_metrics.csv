@@ -1,0 +1,2 @@
+test_accuracy,test_macro_f1,hard_base,hard_small,hard_tiny
+0.925,0.926,1.0,1.0,0.83
