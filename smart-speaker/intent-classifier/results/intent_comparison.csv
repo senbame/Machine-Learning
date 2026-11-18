@@ -1,0 +1,5 @@
+model,test_accuracy,test_macro_f1,cv_acc_mean,cv_acc_std,hard_tiny,hard_base,hard_small,ms_per_phrase
+tfidf,0.9,0.898,0.808,0.055,0.83,1.0,1.0,1.502
+tfidf_tuned,0.925,0.926,0.825,0.052,0.83,1.0,1.0,1.502
+bert,0.85,0.839,0.843,0.055,0.33,0.67,0.67,7.164
+bert_tuned,0.925,0.932,0.898,0.037,0.67,0.67,0.83,7.164

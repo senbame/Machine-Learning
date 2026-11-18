@@ -1,0 +1,19 @@
+model,text,intent
+tiny,разбудем меня в 1837,set_alarm
+tiny,вставь таймер на 5 минут,set_timer
+tiny,запусти бралвер,open_app
+tiny,сделай звук потюже,volume_down
+tiny,делый зуб по громче,volume_up
+tiny,какая сегодня порбона,get_weather
+base,разбудем меня 1837,set_alarm
+base,ставь таймер на 5 минут,set_timer
+base,запусти браузер,open_app
+base,сделай звук потиши,volume_down
+base,делай зуб по громче,volume_up
+base,какая сегодня погода,get_weather
+small,разбуди меня в 1837,set_alarm
+small,поставь таймер на 5 минут,set_timer
+small,запусти браузер,open_app
+small,сделаю звук потише,volume_down
+small,делаю звук погромче,volume_up
+small,какая сегодня погода,get_weather
