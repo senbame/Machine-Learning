@@ -10,3 +10,73 @@ ffmpeg_bin/
 **/models/*
 !**/models/.gitkeep
 **/data/raw/
+
+# --- Секреты (никогда не коммитить) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials.json
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+venv/
+.venv/
+env/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Данные ---
+# Сырые и промежуточные данные большие и воспроизводятся скриптами сбора
+data/raw/*
+data/interim/*
+data/processed/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+# data/labeled/ НЕ игнорируем: ручная разметка небольшая и уникальная, ее нельзя потерять
+
+# --- Кэш скрапинга и API ---
+.cache/
+cache/
+*.har
+playwright/.local-browsers/
+
+# --- Модели и тяжелые артефакты ---
+models/*.pkl
+models/*.joblib
+models/*.pt
+models/*.bin
+models/*.onnx
+!models/.gitkeep
+# кэш предобученных трансформеров (Hugging Face)
+.huggingface/
+huggingface/
+wandb/
+mlruns/
+
+# --- Django ---
+service/db.sqlite3
+*.sqlite3
+service/staticfiles/
+service/media/
+*.log
+
+# --- Docker ---
+docker-compose.override.yml
+
+# --- IDE и ОС ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
