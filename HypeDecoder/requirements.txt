@@ -1,0 +1,46 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Данные и ML
+pandas
+numpy
+scipy
+pyarrow
+scikit-learn
+lightgbm
+xgboost
+shap
+joblib
+
+# Визуализация и ноутбуки
+matplotlib
+seaborn
+jupyter
+ipykernel
+tqdm
+
+# Сбор данных
+python-dotenv
+requests
+beautifulsoup4
+lxml
+pytrends
+praw
+datasets
+rapidfuzz
+
+# NLP
+torch
+transformers
+sentencepiece
+nltk
+
+# Сервис
+django
+djangorestframework
+gunicorn
+whitenoise
+
+# Тесты и качество кода
+pytest
+pytest-django
+ruff
