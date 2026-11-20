@@ -1,6 +1,6 @@
 --extra-index-url https://download.pytorch.org/whl/cpu
 
-# Данные и ML
+# data and ML
 pandas
 numpy
 scipy
@@ -11,14 +11,14 @@ xgboost
 shap
 joblib
 
-# Визуализация и ноутбуки
+# visualization and notebooks
 matplotlib
 seaborn
 jupyter
 ipykernel
 tqdm
 
-# Сбор данных
+# data collection
 python-dotenv
 requests
 beautifulsoup4
@@ -34,13 +34,13 @@ transformers
 sentencepiece
 nltk
 
-# Сервис
+# service
 django
 djangorestframework
 gunicorn
 whitenoise
 
-# Тесты и качество кода
+# tests and code quality
 pytest
 pytest-django
 ruff
